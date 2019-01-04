@@ -1,5 +1,5 @@
 #English Word Creator
-#Myles Scholz and Ethan Vaincourt
+#Myles Scholz
 
 import numpy as np
 import random
