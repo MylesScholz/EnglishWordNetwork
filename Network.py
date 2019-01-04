@@ -100,7 +100,7 @@ class Network(object):
         """Return the vector of partial derivatives \partial C_x /
         \partial a for the output activations."""
         return (output_activations-y)
-      
+
 #Misc Functions
 
 def sigmoid(z):
