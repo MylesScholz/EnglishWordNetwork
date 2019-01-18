@@ -4,6 +4,7 @@
 import data_parser as dp
 import Network as nw
 
+dp.make_data()
 tr_d, te_d, va_d = dp.load_data()
 print(len(tr_d))
 net = nw.Network([28,25,25,28])

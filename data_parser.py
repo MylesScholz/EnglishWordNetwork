@@ -3,8 +3,9 @@
 
 import re
 import numpy as np
+import pickle as p
 
-def load_data():
+def make_data():
     f = open("words.txt")
     abc = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","-","%"]
     words = []
@@ -12,13 +13,16 @@ def load_data():
     tr_d = []
     te_d = []
     va_d = []
+    switch = True
 
     for x in f:
         x = x.lower()
         x = x.replace("\n","%")
         x = re.sub("[^a-z\-%]+","'",x)
         if "'" not in x:
-            words.append(x)
+            if switch:
+                words.append(x)
+            switch = not switch
 
     for x in range(0,len(words)):
         words[x] = list(words[x])
@@ -44,8 +48,15 @@ def load_data():
     te_d = np.array(te_d)
     va_d = np.array(va_d)
     
-    return (tr_d, te_d, va_d)
+    f = open("data.p","wb")
+    p.dump((tr_d, te_d, va_d),f)
+    f.close()
     
+def load_data():
+    f = open("data.p","rb")
+    tr_d, te_d, va_d = p.load(f)
+    f.close()
+    return (tr_d, te_d, va_d)
 
 def vector(j):
     e = np.zeros((28,1))
